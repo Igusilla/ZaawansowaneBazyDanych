@@ -1,4 +1,4 @@
-﻿CREATE TABLE [236525].[Customer_History] (
+﻿CREATE TABLE [236525].[MSSQL_TemporalHistoryFor_1893581784] (
     [CustomerID]   INT                NOT NULL,
     [NameStyle]    [dbo].[NameStyle]  NOT NULL,
     [Title]        NVARCHAR (8)       NULL,
@@ -19,9 +19,7 @@
 );
 
 
-
-
 GO
-CREATE CLUSTERED INDEX [ix_Customer_History]
-    ON [236525].[Customer_History]([SysEndTime] ASC, [SysStartTime] ASC) WITH (DATA_COMPRESSION = PAGE);
+CREATE CLUSTERED INDEX [ix_MSSQL_TemporalHistoryFor_1893581784]
+    ON [236525].[MSSQL_TemporalHistoryFor_1893581784]([SysEndTime] ASC, [SysStartTime] ASC) WITH (DATA_COMPRESSION = PAGE);
 

@@ -4,7 +4,7 @@
     [Title]        NVARCHAR (8)                                NULL,
     [FirstName]    [dbo].[Name]                                NOT NULL,
     [MiddleName]   [dbo].[Name]                                NULL,
-    [LastName]     [dbo].[Name]                                NOT NULL,
+    [LastName]     [dbo].[I5_surname]                          NOT NULL,
     [Suffix]       NVARCHAR (10)                               NULL,
     [CompanyName]  NVARCHAR (128)                              NULL,
     [SalesPerson]  NVARCHAR (256)                              NULL,
@@ -20,7 +20,9 @@
     CONSTRAINT [AK_Customer_rowguid] UNIQUE NONCLUSTERED ([rowguid] ASC),
     PERIOD FOR SYSTEM_TIME ([SysStartTime], [SysEndTime])
 )
-WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE=[236525].[Customer_History], DATA_CONSISTENCY_CHECK=ON));
+WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE=[236525].[MSSQL_TemporalHistoryFor_1893581784], DATA_CONSISTENCY_CHECK=ON));
+
+
 
 
 

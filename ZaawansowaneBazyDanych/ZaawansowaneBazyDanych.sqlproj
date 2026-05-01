@@ -73,6 +73,8 @@
     <Folder Include="Security\" />
     <Folder Include="SalesLT\Sequences\" />
     <Folder Include="dbo\XMLSchemaCollections\" />
+    <Folder Include="Student_5\Views\" />
+    <Folder Include="Database Triggers\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\BuildVersion.sql" />
@@ -117,5 +119,15 @@
     <Build Include="SalesLT\Tables\ProductAttribute.sql" />
     <Build Include="236525\Tables\Customer_History.sql" />
     <Build Include="dbo\XMLSchemaCollections\AttributeSchema.sql" />
+    <Build Include="SalesLT\Tables\ProductPriceHistory.sql" />
+    <Build Include="SalesLT\Tables\ProductComments.sql" />
+    <Build Include="SalesLT\Tables\PriceChangeErrorLog.sql" />
+    <Build Include="dbo\Tables\DatabaseAuditLog.sql" />
+    <Build Include="236525\Tables\MSSQL_TemporalHistoryFor_1893581784.sql" />
+    <Build Include="Student_5\Views\MyLogicView.sql" />
+    <Build Include="Student_5\Views\BestMarza.sql" />
+    <Build Include="SalesLT\Views\236525_order.sql" />
+    <Build Include="Database Triggers\trg_Audit_TableChanges.sql" />
+    <Build Include="dbo\User Defined Types\I5_surname.sql" />
   </ItemGroup>
 </Project>

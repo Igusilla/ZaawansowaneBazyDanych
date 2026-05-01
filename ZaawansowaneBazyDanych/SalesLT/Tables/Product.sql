@@ -29,8 +29,54 @@
 );
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [IX_Product_ProductNumber]
     ON [SalesLT].[Product]([ProductNumber] ASC)
     INCLUDE([ProductID], [Name], [StandardCost], [ProductCategoryID]);
 
+
+GO
+
+CREATE   TRIGGER SalesLT.trg_Product_TooHigh_Price_Change
+ON SalesLT.Product
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO SalesLT.PriceChangeErrorLog (ProductID, Price, AttemptedPrice, ErrorDescription)
+    SELECT
+        i.ProductID,
+        d.ListPrice,
+        i.ListPrice,
+        'Próba podwyżki o więcej niż 20%, operacja zatrzymana'
+    FROM INSERTED i JOIN DELETED d 
+        ON i.ProductID = d.ProductID
+    WHERE i.ListPrice > (d.ListPrice * 1.2)
+    
+    UPDATE SalesLT.Product
+    SET ListPrice = d.ListPrice
+    FROM SalesLT.Product p JOIN DELETED d ON p.ProductID = d.ProductID
+    JOIN INSERTED i ON p.ProductID = i.ProductID
+    WHERE i.ListPrice > (d.ListPrice * 1.2)
+
+END
+GO
+
+CREATE TRIGGER SalesLT.trg_Product_Price_History
+ON SalesLT.Product
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO SalesLT.ProductPriceHistory (ProductID, OldPrice, NewPrice)
+    SELECT 
+        i.ProductID,
+        d.ListPrice AS OldPrice,
+        i.ListPrice AS NewPrice
+    FROM INSERTED i JOIN DELETED d 
+        ON i.ProductID = d.ProductID
+    WHERE ISNULL(d.ListPrice, -1) <> ISNULL(i.ListPrice, -1);
+END

@@ -1,0 +1,4 @@
+﻿CREATE VIEW SalesLT.[236525_order] AS
+SELECT TOP(100) *
+FROM SalesLT.Product
+ORDER BY ListPrice DESC
